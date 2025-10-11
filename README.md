@@ -163,3 +163,5 @@ This information includes (but is not limited to)
 Additionally the plugin connects to [textures.minecraft.net](https://www.minecraft.net/en-us) to retrieve the Minecraft skins of our contributors (if possible).<br>
 
 *Note that Slimefun is not associated with `Mojang Studios` or `Minecraft`.*
+#   S l i m e f u n 4  
+ 
