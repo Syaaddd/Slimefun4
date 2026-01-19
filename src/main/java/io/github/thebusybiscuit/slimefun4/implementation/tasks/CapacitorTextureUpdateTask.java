@@ -76,7 +76,13 @@ public class CapacitorTextureUpdateTask implements Runnable {
 
     private void setTexture(@Nonnull Block b, @Nonnull HeadTexture texture) {
         PlayerSkin skin = PlayerSkin.fromHashCode(texture.getUniqueId(), texture.getTexture());
-        PlayerHead.setSkin(b, skin, false);
+
+        try {
+            PlayerHead.setSkin(b, skin, false);
+        } catch (UnsupportedOperationException e) {
+            // This can happen if no skin adapter is found (e.g. on unsupported server versions)
+            // We simply ignore this error to prevent crashes
+        }
 
         PaperLib.getBlockState(b, false).getState().update(true, false);
     }

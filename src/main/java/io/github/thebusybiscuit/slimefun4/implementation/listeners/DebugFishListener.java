@@ -95,7 +95,12 @@ public class DebugFishListener implements Listener {
                 Block block = b.getRelative(face);
                 block.setType(Material.PLAYER_HEAD);
 
-                PlayerHead.setSkin(block, HeadTexture.MISSING_TEXTURE.getAsSkin(), true);
+                try {
+                    PlayerHead.setSkin(block, HeadTexture.MISSING_TEXTURE.getAsSkin(), true);
+                } catch (UnsupportedOperationException e) {
+                    // This can happen if no skin adapter is found (e.g. on unsupported server versions)
+                    // We simply ignore this error to prevent crashes
+                }
                 SoundEffect.DEBUG_FISH_CLICK_SOUND.playFor(p);
             }, 2L);
         } else if (BlockStorage.hasBlockInfo(b)) {

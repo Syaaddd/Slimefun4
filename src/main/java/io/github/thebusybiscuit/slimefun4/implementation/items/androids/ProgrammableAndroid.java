@@ -880,11 +880,17 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
             block.setBlockData(blockData);
 
             Slimefun.runSync(() -> {
-                PlayerSkin skin = PlayerSkin.fromBase64(texture);
-                Material type = block.getType();
-                // Ensure that this Block is still a Player Head
-                if (type == Material.PLAYER_HEAD || type == Material.PLAYER_WALL_HEAD) {
-                    PlayerHead.setSkin(block, skin, true);
+                if (texture != null) {
+                    PlayerSkin skin = PlayerSkin.fromBase64(texture);
+                    Material type = block.getType();
+                    // Ensure that this Block is still a Player Head
+                    if (type == Material.PLAYER_HEAD || type == Material.PLAYER_WALL_HEAD) {
+                        try {
+                            PlayerHead.setSkin(block, skin, true);
+                        } catch (UnsupportedOperationException x) {
+                            Slimefun.logger().log(Level.WARNING, "Failed to set skin for android", x);
+                        }
+                    }
                 }
             });
 
