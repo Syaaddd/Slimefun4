@@ -44,12 +44,11 @@ public class BlockPhysicsListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockFall(EntityChangeBlockEvent e) {
-        if (e.getEntity().getType() == EntityType.FALLING_BLOCK && BlockStorage.hasBlockInfo(e.getBlock())) {
+        if (BlockStorage.hasBlockInfo(e.getBlock())) {
             e.setCancelled(true);
-            FallingBlock block = (FallingBlock) e.getEntity();
 
-            if (block.getDropItem()) {
-                block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(block.getBlockData().getMaterial(), 1));
+            if (e.getEntity() instanceof FallingBlock block && block.getDropItem()) {
+                block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(block.getBlockData().getMaterial()));
             }
         }
     }

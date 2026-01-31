@@ -888,7 +888,7 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
                         try {
                             PlayerHead.setSkin(block, skin, true);
                         } catch (UnsupportedOperationException x) {
-                            Slimefun.logger().log(Level.WARNING, "Failed to set skin for android", x);
+                            Slimefun.logger().warning("Failed to set skin for android, your server software may not be supported.");
                         }
                     }
                 }
